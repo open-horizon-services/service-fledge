@@ -1,11 +1,17 @@
-FROM python/3.10.4-slim-buster
+FROM balenalib/raspberry-pi-debian-python:3.7.4
+# FROM python:3.10.4-buster
+
+ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get -yq update \
-	&& apt-get -yq upgrade
+	&& apt-get -yq upgrade \
+	&& apt-get -yq install gnupg2 wget systemd-sysv-install
 
-RUN wget -q -O - http://archives.fledge-iot.org/KEY.gpg | sudo apt-key add -
+RUN wget -q -O - http://archives.fledge-iot.org/KEY.gpg | apt-key add -
 
-RUN echo "deb  http://archives.fledge-iot.org/latest/buster/armv7l/ /" >> /etc/apt/sources.list
+RUN echo "deb  http://archives.fledge-iot.org/latest/buster/armv7l/ /" > /etc/apt/sources.list.d/fledge.list
 
-RUN apt -yq update \
-	&& apt -yq install fledge
+RUN apt-get -yq update \
+	&& apt-get -yq install fledge
+
+CMD ["/usr/local/fledge/bin/fledge", "start"]
