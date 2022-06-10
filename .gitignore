@@ -1,3 +1,5 @@
 .DS_Store
 **/.DS_Store
 Dockerfile.arm64
+.vscode
+**/.vscode
