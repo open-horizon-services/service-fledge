@@ -1,1 +1,0 @@
-{"buildTargets":["\"openhorizon/service-fledge\"_\"arm\"","--platform","-t","build","buildx","clean","docker","linux/arm/v7"],"launchTargets":[],"customConfigurationProvider":{"workspaceBrowse":{"browsePath":[],"compilerArgs":[]},"fileIndex":[]}}
