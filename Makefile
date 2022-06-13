@@ -1,11 +1,15 @@
 # Multi-arch docker container instance of the open-source Fledge project intended for Open Horizon Linux edge nodes
 
-export DOCKERHUB_ID ?= joewxboy
-export SERVICE_NAME := service-fledge
-export SERVICE_VERSION := 0.0.2
-export PATTERN_NAME ?= pattern-fledge
-export ARCH ?= arm64
+export DOCKER_HUB_ID ?= joewxboy
 export HZN_ORG_ID ?= examples
+
+export SERVICE_NAME ?= service-fledge
+export SERVICE_VERSION ?= 0.0.2
+export SERVICE_ORG_ID ?= $(HZN_ORG_ID)
+export PATTERN_NAME ?= pattern-fledge
+
+# Don't allow the ARCH to be overridden at this time since only arm64 supported today
+export ARCH := arm64
 export DOCKER_IMAGE_BASE ?= $(DOCKERHUB_ID)/service-fledge
 
 init:
