@@ -1,0 +1,42 @@
+{
+  "properties": [      /* A list of policy properties that describe the object. */
+                       /* It applies to both deployment and node management.*/
+                       /* It usually containts the built-in node properties.*/
+    {
+       "name": "",
+       "value": null
+    }
+  ],
+  "constraints": [     /* A list of constraint expressions of the form <property name> <operator> <property value>, */
+                       /* separated by boolean operators AND (&&) or OR (||).*/
+                       /* It applies to both deployment and node management.*/
+                       /* It should be empty unless deployment and managment have the same constraint expressions.*/
+       "" 
+  ], 
+  "deployment": {      /* Policies that are used for deployment only. */
+      "properties": [  /* A list of policy properties for deployment. */
+                       /* It overwrites the properties with the same name on the top level.*/
+        {
+           "name": "",
+           "value": null
+        }
+      ],
+      "constraints": [ /* A list of constraints for deployment. */
+                       /* It overwrites all the constraints on the top level if not empty.*/
+         "" 
+      ] 
+  },
+  "management": {      /* Policies that are used for node management only. */
+      "properties": [  /* A list of policy properties for node management. */
+                       /* It overwrites the properties with the same name on the top level.*/
+        {
+           "name": "",
+           "value": null
+        }
+      ],
+      "constraints": [ /* A list of constraints for node management. */
+                       /* It overwrites all the constraints on the top level if not empty.*/
+         "" 
+      ] 
+  }
+}
