@@ -22,7 +22,7 @@ export FLEDGE_WEB_UI_PORT ?= 8082
 # Detect Operating System running Make
 OS := $(shell uname -s)
 
-default:
+default: run browse
 
 init:
 # Get the latest official Dockerfile from fledge project
