@@ -6,5 +6,7 @@
             "value": "value1"
         }
     ],
-    "constraints": []
+    "constraints": [
+        "purpose == SmartAg"
+    ]
 }

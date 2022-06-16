@@ -1,8 +1,0 @@
-{
-    "HZN_ORG_ID": "myorg",
-    "MetadataVars": {
-        "DOCKER_IMAGE_BASE": "",
-        "SERVICE_NAME": "",
-        "SERVICE_VERSION": ""
-    }
-}
