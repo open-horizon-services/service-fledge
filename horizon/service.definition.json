@@ -1,0 +1,26 @@
+{
+    "org": "$HZN_ORG_ID",
+    "label": "$SERVICE_NAME for $ARCH",
+    "description": "Open Horizon service for the open-source Fledge project software",
+    "public": true,
+    "documentation": "https://github.com/open-horizon-services/service-fledge",
+    "url": "$SERVICE_NAME",
+    "version": "$SERVICE_VERSION",
+    "arch": "$ARCH",
+    "sharable": "singleton",
+    "requiredServices": [],
+    "userInput": [],
+    "deployment": {
+        "services": {
+            "$SERVICE_NAME": {
+                "image": "${DOCKER_IMAGE_BASE}_$ARCH:$DOCKER_IMAGE_VERSION",
+                "privileged": false,
+                "ports": [
+                    {"HostIP":"0.0.0.0","HostPort":"${FLEDGE_REST_API_PORT}:8081/tcp"},
+                    {"HostIP":"0.0.0.0","HostPort":"${FLEDGE_SECURE_REST_API_PORT}:1995/tcp"},
+                    {"HostIP":"0.0.0.0","HostPort":"${FLEDGE_WEB_UI_PORT}:80/tcp"}
+                ]
+            }
+        }
+    }
+}
