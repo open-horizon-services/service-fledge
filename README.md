@@ -1,4 +1,5 @@
 # service-fledge
+![](https://img.shields.io/github/license/open-horizon-services/service-fledge) ![](https://img.shields.io/badge/architecture-x86,_arm64-green)  
 
 This is a simple, extensible, containerized version of the fledge open-source project designed to be deployed and managed by Open Horizon.  The fledge web UI is designed to be run in a web browser, so you will want to navigate to http://localhost:8082/ to use the software once it has been deployed.
 
