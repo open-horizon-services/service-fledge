@@ -78,7 +78,7 @@ else
 	@xdg-open http://127.0.0.1:$(FLEDGE_WEB_UI_PORT)/
 endif
 
-publish: publish-service publish-service-policy publish-deployment-policy agent-run browse
+publish: publish-service publish-service-policy publish-deployment-policy
 
 publish-service:
 	@echo "=================="
