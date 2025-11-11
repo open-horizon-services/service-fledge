@@ -22,17 +22,52 @@ export FLEDGE_WEB_UI_PORT ?= 8082
 # Detect Operating System running Make
 OS := $(shell uname -s)
 
+# Define the Dockerfile content to avoid duplication
+define DOCKERFILE_CONTENT
+FROM ubuntu:24.04
+
+LABEL maintainer="Fledge Project <support@fledge-iot.org>"
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+        curl \
+        gnupg \
+        ca-certificates \
+    # Add Fledge GPG key and repository using gpg --dearmor
+    && curl -fsSL https://packagecloud.io/fledge-iot/fledge/gpgkey | gpg --dearmor -o /usr/share/keyrings/fledge-iot.gpg \
+    && echo "deb [signed-by=/usr/share/keyrings/fledge-iot.gpg] https://packagecloud.io/fledge-iot/fledge/ubuntu/ noble main" > /etc/apt/sources.list.d/fledge.list \
+    && apt-get update \
+    && apt-get install -y --no-install-recommends \
+        fledge \
+        fledge-south-modbus \
+        fledge-south-system \
+        fledge-north-http \
+        fledge-filter-scale \
+        fledge-filter-delta \
+        fledge-filter-metadata \
+        fledge-service-notification \
+    && rm -rf /var/lib/apt/lists/*
+
+EXPOSE 8081 8082 1995
+
+ENTRYPOINT ["fledge"]
+CMD ["start"]
+endef
+export DOCKERFILE_CONTENT
+
 default: run browse
 
 init:
-# Get the latest official Dockerfile from fledge project
-	@curl -sS https://raw.githubusercontent.com/fledge-iot/fledge-pkg/develop/docker/latest/Dockerfile.ubuntu1804-arm64 > Dockerfile.arm64
-	@curl -sS https://raw.githubusercontent.com/fledge-iot/fledge-pkg/develop/docker/latest/Dockerfile.ubuntu2004 > Dockerfile.amd64
+# Generate Dockerfiles for multi-architecture builds targeting Ubuntu 24.04 (Noble Numbat)
+	@echo "Generating Dockerfiles for Fledge on Ubuntu 24.04..."
+	@echo "$$DOCKERFILE_CONTENT" > Dockerfile.amd64
+	@echo "$$DOCKERFILE_CONTENT" > Dockerfile.arm64
 # ensure you are logged in so that you can push built images to DockerHub
 	docker login
 # enable cross-arch builds using buildx from Docker Desktop
-	@docker buildx create --name mybuilder
-	@docker buildx use mybuilder
+	@docker buildx create --name mybuilder --use || docker buildx use mybuilder
 	@docker buildx inspect --bootstrap
 
 build:
